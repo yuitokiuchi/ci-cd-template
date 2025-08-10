@@ -1,0 +1,17 @@
+# Environment variables files
+.env
+
+# Rust build artifacts
+api-auth/target/
+api-chat/target/
+
+# Database data and backups
+sql_db/data/
+sql_db/backups/
+
+# IDE specific files
+.vscode/
+.idea/
+
+node_modules
+dist

@@ -1,0 +1,27 @@
+#!/bin/bash
+
+# コンテナ起動
+# docker compose up -d
+# コンテナ削除
+# docker compose down
+
+# 一時停止
+# docker stop [コンテナ名]
+# 再開
+# docker start [コンテナ名]
+
+# docker ps         # 実行中のコンテナ
+# docker ps -a      # 停止中のものも含めてすべて
+
+# 起動する（バックグラウンド）	docker-compose up -d
+# 状態を確認する	docker-compose ps
+# ログを見る	docker-compose logs db
+# リアルタイムでログを見る	docker-compose logs -f db
+# 完全に停止・削除する	docker-compose down
+# コンテナの中に入る	docker-compose exec db bash
+
+# chat-system/ ディレクトリで実行
+git add .
+git commit -m "feat(auth-api): Implement refresh token rotation"
+
+git push origin main

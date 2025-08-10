@@ -1,0 +1,29 @@
+# docker-compose.override.yml - For Local Development
+
+services:
+  db:
+    volumes:
+      # ローカル開発では相対パスでデータを永続化
+      - ${DATA_BASE_PATH}/data:/var/lib/postgresql/data
+      - ${DATA_BASE_PATH}/backups:/backups
+      - ${DATA_BASE_PATH}/init:/docker-entrypoint-initdb.d
+    ports:
+      # ローカルのDBクライアントから接続するためにポートを公開
+      - "3306:3306"
+
+  auth-api:
+    # ローカルのDockerfileからビルド
+    build: ./api-auth
+    ports:
+      # ローカルのブラウザから直接APIを叩くためにポートを公開
+      - "3000:3000"
+
+  chat-api:
+    build: ./api-chat
+    ports:
+      - "4000:4000"
+
+  phpmyadmin:
+    ports:
+      - "8080:80"
+    

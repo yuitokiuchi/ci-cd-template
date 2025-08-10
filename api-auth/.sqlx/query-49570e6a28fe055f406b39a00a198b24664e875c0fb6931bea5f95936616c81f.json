@@ -1,0 +1,12 @@
+{
+  "db_name": "MySQL",
+  "query": "\n        INSERT INTO refresh_tokens (jti, user_id, expires_at) \n        VALUES (?, ?, ?)\n        ON DUPLICATE KEY UPDATE \n            jti = VALUES(jti),\n            expires_at = VALUES(expires_at)\n        ",
+  "describe": {
+    "columns": [],
+    "parameters": {
+      "Right": 3
+    },
+    "nullable": []
+  },
+  "hash": "49570e6a28fe055f406b39a00a198b24664e875c0fb6931bea5f95936616c81f"
+}

@@ -1,0 +1,48 @@
+services:
+  db:
+    image: mariadb:latest
+    container_name: sql_db
+    environment:
+      MYSQL_DATABASE: ${MYSQL_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      DB_APP_USER: 'app'
+      DB_APP_PASSWORD: ${DB_APP_PASSWORD}
+    networks:
+      - app-network
+
+  auth-api:
+    container_name: api_auth
+    env_file: [".env"]
+    environment:
+      DATABASE_URL: mysql://app:${DB_APP_PASSWORD}@db:3306/${MYSQL_DATABASE}
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  chat-api:
+    container_name: api_chat
+    env_file: [".env"]
+    environment:
+      DATABASE_URL: mysql://app:${DB_APP_PASSWORD}@db:3306/${MYSQL_DATABASE}
+    depends_on:
+      - db
+    networks:
+      - app-network
+  
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    container_name: phpmyadmin
+    environment:
+      PMA_HOST: db          # データベースのホスト名 (dbサービス)
+      PMA_USER: root  # データベースのユーザー名
+      PMA_PASSWORD: ${MYSQL_ROOT_PASSWORD}  # データベースのパスワード
+      # PMA_ABSOLUTE_URI: http://localhost:8080/ # （オプション）HTTPSを使う場合などに設定
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
