@@ -7,13 +7,6 @@ services:
       - mariadb-data:/var/lib/mysql 
       - mariadb-backups:/backups
       - ./sql/init:/docker-entrypoint-initdb.d
-  
-  auth-api:
-    image: ghcr.io/yuitokiuchi/auth-api:latest
-    restart: always
-
-    ports:
-      - "127.0.0.1:3000:3000"
 
   chat-api:
     image: ghcr.io/yuitokiuchi/chat-api:latest

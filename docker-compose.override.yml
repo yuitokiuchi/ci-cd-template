@@ -11,13 +11,6 @@ services:
       # ローカルのDBクライアントから接続するためにポートを公開
       - "3306:3306"
 
-  auth-api:
-    # ローカルのDockerfileからビルド
-    build: ./api-auth
-    ports:
-      # ローカルのブラウザから直接APIを叩くためにポートを公開
-      - "3000:3000"
-
   chat-api:
     build: ./api-chat
     ports:
